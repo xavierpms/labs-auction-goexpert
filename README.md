@@ -12,6 +12,24 @@ API de leilão em Go com MongoDB.
 
 O projeto usa o arquivo `cmd/auction/.env`.
 
+Arquivos de ambiente dev disponíveis:
+
+- `cmd/auction/.env.dev.docker` (para rodar com Docker Compose)
+- `cmd/auction/.env.dev.local` (para rodar API localmente)
+- `cmd/auction/.env.example` (modelo base)
+
+Antes de rodar, copie o perfil desejado para `cmd/auction/.env`:
+
+```bash
+cp cmd/auction/.env.dev.docker cmd/auction/.env
+```
+
+ou
+
+```bash
+cp cmd/auction/.env.dev.local cmd/auction/.env
+```
+
 Exemplo atual:
 
 ```env
@@ -19,8 +37,8 @@ BATCH_INSERT_INTERVAL=20s
 MAX_BATCH_SIZE=4
 AUCTION_INTERVAL=20s
 
-MONGO_INITDB_ROOT_USERNAME: admin
-MONGO_INITDB_ROOT_PASSWORD: admin
+MONGO_INITDB_ROOT_USERNAME=admin
+MONGO_INITDB_ROOT_PASSWORD=admin
 MONGODB_URL=mongodb://admin:admin@mongodb:27017/auctions?authSource=admin
 MONGODB_DB=auctions
 ```
@@ -42,6 +60,12 @@ MONGODB_DB=auctions
 ## Rodando em ambiente dev com Docker Compose
 
 Na raiz do projeto:
+
+```bash
+cp cmd/auction/.env.dev.docker cmd/auction/.env
+```
+
+Depois execute:
 
 ```bash
 docker compose up --build
@@ -79,7 +103,11 @@ docker run --name auction-mongo \
 
 ### 2) Ajuste o `.env`
 
-Troque o `MONGODB_URL` para `localhost` (conforme exemplo acima).
+Use o perfil local:
+
+```bash
+cp cmd/auction/.env.dev.local cmd/auction/.env
+```
 
 ### 3) Execute a API
 
